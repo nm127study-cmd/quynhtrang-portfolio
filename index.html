@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Nguyễn Quỳnh Trang</title>
+    <!-- Google Fonts: Quicksand (Cute/Rounded) & Nunito (Soft/Readable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['"Quicksand"', 'sans-serif'],
+                        body: ['"Nunito"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            pink1: '#F2DCF2', // Hồng rất nhạt
+                            pink2: '#EECEF2', // Hồng nhạt
+                            pink3: '#F2B3DC', // Hồng trung bình
+                            pink4: '#F2A2D6', // Hồng đậm
+                            purple: '#CEBDF2', // Tím nhạt
+                            text: '#4A3B52', // Chữ tím than
+                            textLight: '#7A6B82'
+                        },
+                        background: '#FFF5FA' // Trắng hồng siêu nhẹ
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 5s ease-in-out infinite 2s',
+                        'float-fast': 'float 4s ease-in-out infinite 1s',
+                        'blob': 'blob 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+                        },
+                        blob: {
+                            '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+                            '50%': { borderRadius: '30% 70% 70% 30% / 50% 60% 30% 60%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Pattern nền chấm bi dễ thương */
+        .polka-dot-bg {
+            background-color: #FFF9FC;
+            background-image: radial-gradient(#F2DCF2 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Navbar viền bo tròn trôi nổi */
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px -10px rgba(242, 162, 214, 0.3);
+        }
+
+        /* Định dạng nội dung từ DOCX */
+        .content-table { width: 100%; border-collapse: collapse; margin-top: 1rem; margin-bottom: 1.5rem; font-family: 'Nunito', sans-serif; font-size: 0.9rem; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(242, 179, 220, 0.15);}
+        .content-table th, .content-table td { border: 1px solid #EECEF2; padding: 12px; text-align: left; }
+        .content-table th { background-color: #F2DCF2; font-family: 'Quicksand', sans-serif; font-weight: 700; color: #4A3B52; }
+        
+        .rich-text h3 { font-family: 'Quicksand', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #4A3B52; background: linear-gradient(to right, #F2DCF2, transparent); padding: 5px 15px; border-radius: 20px; border-left: 4px solid #F2A2D6; display: inline-block;}
+        .rich-text p { margin-bottom: 0.75rem; line-height: 1.7; }
+        .rich-text ul { list-style-type: none; padding-left: 0.5rem; margin-bottom: 1rem; }
+        .rich-text ul li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; }
+        .rich-text ul li::before { content: '✿'; color: #F2A2D6; position: absolute; left: 0; font-size: 1.1rem; top: -2px; }
+        .rich-text strong { font-family: 'Quicksand', sans-serif; font-weight: 700; color: #4A3B52; }
+        .rich-text a { color: #F2A2D6; text-decoration: none; font-weight: 700; border-bottom: 2px dashed #CEBDF2; transition: all 0.3s;}
+        .rich-text a:hover { color: #CEBDF2; border-bottom-color: #F2A2D6; }
+    </style>
+</head>
+<body class="polka-dot-bg text-brand-text font-body min-h-screen flex flex-col relative selection:bg-brand-pink3 selection:text-white overflow-x-hidden">
+
+    <!-- CÁC ELEMENT SINH ĐỘNG LƠ LỬNG TRONG NỀN -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <!-- Khối Blob 1 -->
+        <div class="absolute top-[-5%] left-[-5%] w-72 h-72 bg-gradient-to-tr from-brand-pink1 to-brand-pink2 opacity-60 mix-blend-multiply filter blur-2xl animate-float"></div>
+        <!-- Khối Blob 2 -->
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-gradient-to-tl from-brand-purple to-brand-pink1 opacity-50 mix-blend-multiply filter blur-3xl animate-float-delayed"></div>
+        <!-- Khối Blob 3 -->
+        <div class="absolute bottom-[-10%] left-[10%] w-[30rem] h-[30rem] bg-gradient-to-tr from-brand-pink3 to-brand-pink1 opacity-40 mix-blend-multiply filter blur-3xl animate-float"></div>
+        
+        <!-- Các icon dễ thương lơ lửng -->
+        <i class="ph-fill ph-sparkle absolute top-[15%] left-[15%] text-brand-pink4 text-3xl animate-float-fast opacity-50"></i>
+        <i class="ph-fill ph-heart absolute top-[30%] right-[20%] text-brand-pink3 text-4xl animate-float opacity-40"></i>
+        <i class="ph-fill ph-star absolute bottom-[20%] right-[10%] text-brand-purple text-5xl animate-float-delayed opacity-50"></i>
+        <i class="ph-fill ph-flower-tulip absolute bottom-[30%] left-[5%] text-brand-pink4 text-4xl animate-float opacity-40"></i>
+    </div>
+
+    <!-- Thanh Điều Hướng (Navbar) Dạng Viên Thuốc Đáng Yêu -->
+    <div class="fixed w-full z-40 top-4 px-4 flex justify-center pointer-events-none">
+        <nav class="glass-pill pointer-events-auto rounded-full px-6 py-3 flex justify-between items-center w-full max-w-4xl border border-white/50">
+            <div class="flex items-center gap-2 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                <div class="w-10 h-10 rounded-full bg-brand-pink1 flex items-center justify-center text-brand-pink4 group-hover:bg-brand-pink4 group-hover:text-white transition-colors duration-300">
+                    <i class="ph-fill ph-cat text-2xl group-hover:animate-bounce"></i>
+                </div>
+                <span class="font-heading font-bold text-xl text-brand-text hidden sm:block">Quỳnh Trang</span>
+            </div>
+            
+            <div class="flex space-x-2 sm:space-x-6">
+                <a href="#home" class="nav-link text-brand-text font-bold px-3 py-2 rounded-full hover:bg-brand-pink1 hover:text-brand-pink4 transition-all duration-300">Giới thiệu</a>
+                <a href="#projects" class="nav-link text-brand-textLight font-bold px-3 py-2 rounded-full hover:bg-brand-pink1 hover:text-brand-pink4 transition-all duration-300">Dự án</a>
+                <a href="#conclusion" class="nav-link text-brand-textLight font-bold px-3 py-2 rounded-full hover:bg-brand-pink1 hover:text-brand-pink4 transition-all duration-300">Tổng kết</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- KHU VỰC NỘI DUNG CHÍNH -->
+    <main class="flex-grow pt-24">
+
+        <!-- ================= PHẦN 1: GIỚI THIỆU ================= -->
+        <section id="home" class="pt-20 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full min-h-[90vh] flex items-center scroll-mt-24">
+            <div class="flex flex-col md:flex-row gap-12 items-center bg-white/70 backdrop-blur-lg p-8 md:p-14 rounded-[3rem] shadow-xl border-2 border-white/80 relative">
+                
+                <!-- Huy hiệu trang trí -->
+                <div class="absolute -top-5 -right-5 bg-brand-pink4 text-white font-heading font-bold px-6 py-2 rounded-full transform rotate-12 shadow-lg animate-float-fast">
+                    MSSV: 25041160 🌸
+                </div>
+
+                <div class="w-full md:w-5/12 flex justify-center relative">
+                    <!-- Khung ảnh Avatar lượn sóng (Blob) -->
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-tr from-brand-pink4 via-brand-pink3 to-brand-purple p-2 animate-blob shadow-2xl relative z-10 flex items-center justify-center overflow-hidden">
+                        <img src="avt.jpg" alt="Ảnh đại diện Quỳnh Trang" class="w-full h-full object-cover animate-blob">
+                    </div>
+                </div>
+
+                <div class="w-full md:w-7/12 space-y-6">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-brand-text leading-tight">
+                        Xin chào, <br>tôi là <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink4 to-brand-purple">Nguyễn Quỳnh Trang</span>
+                    </h1>
+                    <div class="bg-brand-pink1/50 rounded-2xl p-5 border-l-4 border-brand-pink4">
+                        <p class="text-xl text-brand-text font-heading font-semibold">
+                            "Biến công nghệ thành trợ lý đắc lực, gìn giữ tư duy phản biện làm cốt lõi." ✨
+                        </p>
+                    </div>
+                    <div class="space-y-4 text-brand-textLight text-lg bg-white/50 p-6 rounded-3xl border border-brand-pink1">
+                        <p><strong class="font-heading text-brand-text text-xl flex items-center gap-2"><i class="ph-fill ph-target text-brand-pink3"></i> Định hướng phát triển:</strong> Mục tiêu học tập của tôi là trở thành một sinh viên toàn diện, không chỉ nắm vững chuyên môn nghiên cứu ngôn ngữ (Tiếng Anh học thuật) mà còn làm chủ các kỹ năng số nền tảng. Tôi hướng tới việc ứng dụng công nghệ trực tuyến và AI một cách sáng tạo, an toàn và mang lại hiệu suất cao.</p>
+                        <p><strong class="font-heading text-brand-text text-xl flex items-center gap-2 mt-4"><i class="ph-fill ph-flag-banner text-brand-purple"></i> Mục tiêu của Portfolio:</strong> Là bản báo cáo tổng hợp đồng bộ, kết nối chuỗi 6 bài tập kỹ năng. Trang web minh chứng cho quy trình khép kín: từ quản trị dữ liệu, làm việc nhóm, nghiên cứu học thuật, cho đến khai thác AI đạo đức.</p>
+                    </div>
+                    <div class="pt-4 flex gap-4">
+                        <a href="#projects" class="inline-flex items-center gap-2 bg-gradient-to-r from-brand-pink4 to-brand-purple hover:opacity-90 text-white px-8 py-4 rounded-full font-heading font-bold text-lg transition-all duration-300 shadow-[0_8px_20px_rgba(242,162,214,0.4)] hover:-translate-y-2 group">
+                            Khám phá Hành trình <i class="ph-bold ph-arrow-down group-hover:animate-bounce"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PHẦN 2: DỰ ÁN ================= -->
+        <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full scroll-mt-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 relative">
+                <i class="ph-fill ph-stars absolute -top-10 left-1/2 transform -translate-x-1/2 text-5xl text-brand-pink3 opacity-50"></i>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-brand-text mb-4 z-10 relative">Danh sách Dự án</h2>
+                <div class="w-24 h-2 bg-gradient-to-r from-brand-pink4 to-brand-purple mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-brand-textLight font-medium">Hành trình 6 bước nâng cao Kỹ năng số, Nghiên cứu học thuật và Ứng dụng AI đạo đức.</p>
+            </div>
+
+            <!-- Lưới Dự án -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="project-grid">
+                <!-- Nội dung được sinh bằng Javascript -->
+            </div>
+        </section>
+
+        <!-- ================= PHẦN 3: TỔNG KẾT ================= -->
+        <section id="conclusion" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full scroll-mt-10 mb-12">
+            <div class="bg-white/80 backdrop-blur-lg rounded-[3rem] shadow-xl border-2 border-brand-pink2 p-8 md:p-14 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-pink1 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+                
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-brand-text mb-16 text-center relative z-10">
+                    <i class="ph-fill ph-gift text-brand-pink4 mr-2"></i>Tổng Kết Hành Trình
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                    <!-- Cột 1 -->
+                    <div class="bg-brand-background/80 p-8 rounded-[2rem] border-2 border-dashed border-brand-pink3 hover:bg-brand-pink1/50 transition-colors duration-300 group">
+                        <div class="w-16 h-16 bg-white text-brand-pink4 rounded-full flex items-center justify-center mb-6 text-4xl shadow-md group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-heart-straight"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold text-brand-text mb-4">Trải nghiệm & Cảm nhận</h3>
+                        <p class="text-brand-textLight leading-relaxed">
+                            Quá trình thực hiện 6 bài tập mang lại cái nhìn sâu sắc về sức mạnh công nghệ. Từ thao tác tệp tin đơn giản đến việc làm "Đạo diễn nghệ thuật" với AI. Sự kết hợp giữa AI, công cụ đám mây và tư duy con người là chìa khóa tạo ra sản phẩm chất lượng.
+                        </p>
+                    </div>
+
+                    <!-- Cột 2 -->
+                    <div class="bg-brand-background/80 p-8 rounded-[2rem] border-2 border-dashed border-brand-purple hover:bg-brand-pink1/50 transition-colors duration-300 group">
+                        <div class="w-16 h-16 bg-white text-brand-purple rounded-full flex items-center justify-center mb-6 text-4xl shadow-md group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-brain"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold text-brand-text mb-4">Kỹ năng cốt lõi</h3>
+                        <ul class="text-brand-textLight space-y-3 font-medium">
+                            <li class="flex items-start gap-2"><i class="ph-fill ph-sparkle text-brand-pink4 mt-1"></i> <span><strong>Nghiên cứu:</strong> Chiến lược đánh giá 5 tiêu chí.</span></li>
+                            <li class="flex items-start gap-2"><i class="ph-fill ph-sparkle text-brand-pink4 mt-1"></i> <span><strong>Cộng tác:</strong> Duy trì "Single Source of Truth".</span></li>
+                            <li class="flex items-start gap-2"><i class="ph-fill ph-sparkle text-brand-pink4 mt-1"></i> <span><strong>Prompting:</strong> Kỹ thuật Role & Few-shot.</span></li>
+                            <li class="flex items-start gap-2"><i class="ph-fill ph-sparkle text-brand-pink4 mt-1"></i> <span><strong>Đạo đức AI:</strong> Bộ 6 nguyên tắc cá nhân.</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Cột 3 -->
+                    <div class="bg-brand-background/80 p-8 rounded-[2rem] border-2 border-dashed border-brand-pink4 hover:bg-brand-pink1/50 transition-colors duration-300 group">
+                        <div class="w-16 h-16 bg-white text-brand-pink4 rounded-full flex items-center justify-center mb-6 text-4xl shadow-md group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-shooting-star"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold text-brand-text mb-4">Tâm đắc & Thách thức</h3>
+                        <p class="text-brand-textLight leading-relaxed mb-4">
+                            <strong class="font-heading text-brand-text">Tâm đắc:</strong> Xây dựng được bộ nguyên tắc dùng AI và sáng kiến quy tắc "Sở hữu đoạn văn" khi làm việc nhóm trên Docs.
+                        </p>
+                        <p class="text-brand-textLight leading-relaxed">
+                            <strong class="font-heading text-brand-text">Thách thức:</strong> Xử lý lỗi typography tiếng Việt do AI sinh ra, đòi hỏi kết hợp linh hoạt Canva để chỉnh sửa thủ công.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/80 backdrop-blur-md border-t-2 border-dashed border-brand-pink2 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-brand-textLight font-heading font-bold flex flex-col items-center gap-2">
+            <i class="ph-fill ph-plant text-3xl text-brand-pink4"></i>
+            <p>© 2026 Nguyễn Quỳnh Trang - 25041160.</p>
+            <p class="text-sm">Được thiết kế với sự tỉ mỉ và đáng yêu 💖</p>
+        </div>
+    </footer>
+
+    <!-- ================= MODALS ĐÁNG YÊU ================= -->
+
+    <!-- Modal Chi tiết Bài học (Nội dung Text) -->
+    <div id="content-modal" class="fixed inset-0 z-50 hidden bg-[#4A3B52]/40 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col transform scale-95 transition-transform duration-300 relative border-4 border-brand-pink1" id="content-modal-box">
+            
+            <!-- Nút Đóng siêu to dễ bấm -->
+            <button onclick="closeModal('content-modal')" class="absolute top-6 right-6 z-20 bg-white hover:bg-brand-pink4 hover:text-white text-brand-text p-3 rounded-full shadow-lg transition-all duration-300 hover:rotate-90">
+                <i class="ph-bold ph-x text-2xl"></i>
+            </button>
+            
+            <!-- Header Modal Bo Tròn Mềm Mại -->
+            <div class="bg-gradient-to-r from-brand-pink2 to-brand-pink3 p-8 md:p-10 text-brand-text flex-shrink-0 relative overflow-hidden">
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/30 rounded-full blur-xl"></div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-pink4/20 rounded-full blur-xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-start gap-3">
+                    <span class="bg-white px-4 py-1.5 rounded-full text-sm font-heading font-bold uppercase tracking-widest shadow-sm text-brand-pink4" id="modal-badge">Bài 1</span>
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold mt-2 leading-snug" id="modal-title">Tên Bài</h2>
+                </div>
+            </div>
+
+            <!-- Body Modal (Chứa Rich Text) -->
+            <div class="p-8 md:p-12 overflow-y-auto no-scrollbar flex-grow bg-white rich-text polka-dot-bg" id="modal-rich-content">
+                <!-- Nội dung Y NGUYÊN từ Docx sẽ được đổ vào đây -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Xem Minh Chứng (Khung chứa PDF) -->
+    <div id="evidence-modal" class="fixed inset-0 z-50 hidden bg-[#4A3B52]/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-6xl h-[90vh] overflow-hidden flex flex-col transform scale-95 transition-transform duration-300 relative border-4 border-brand-purple" id="evidence-modal-box">
+            
+            <!-- Header Nhỏ Xinh -->
+            <div class="bg-brand-background px-8 py-5 flex justify-between items-center border-b-2 border-dashed border-brand-purple relative overflow-hidden">
+                <div class="relative z-10 flex items-center gap-3 w-10/12">
+                    <div class="w-10 h-10 bg-brand-purple text-white rounded-full flex items-center justify-center text-xl shrink-0">
+                        <i class="ph-fill ph-file-pdf"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl md:text-2xl text-brand-text truncate">
+                        Minh chứng: <span id="evidence-title" class="text-brand-purple">Tên bài</span>
+                    </h3>
+                </div>
+                <button onclick="closeModal('evidence-modal')" class="relative z-10 bg-white hover:bg-brand-pink4 hover:text-white text-brand-text p-2 rounded-full shadow-md transition-all duration-300 shrink-0">
+                    <i class="ph-bold ph-x text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Khung Iframe -->
+            <div class="flex-grow bg-[#f5f5f5] relative w-full h-full p-2">
+                <!-- HƯỚNG DẪN: Sửa thuộc tính src của thẻ iframe trong biến data thành link PDF của bạn -->
+                <iframe id="evidence-iframe" src="" class="w-full h-full border-0 rounded-[1.5rem]" allow="autoplay"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript -->
+    <script>
+        // DỮ LIỆU ĐƯỢC LẤY CHÍNH XÁC VÀ ĐẦY ĐỦ TỪ CÁC FILE DOCX NHƯ BẠN YÊU CẦU
+        const projectsData = [
+            {
+                id: 1,
+                badge: "Bài 1",
+                title: "Thao tác cơ bản với tệp tin và thư mục",
+                icon: "ph-desktop",
+                desc: "Làm chủ thao tác nền tảng và quản trị dữ liệu trên máy tính.",
+                evidenceUrl: "https://drive.google.com/file/d/1xt2nyt_cTZ5yyk5ZxwDN7oq_22vOS3uZ/preview", 
+                htmlContent: `
+                    <h3 class="font-bold text-xl uppercase text-brand-text mb-4">Bài tập 1: Thao tác cơ bản với tệp tin và thư mục</h3>
+                    <ul class="space-y-2 text-lg text-brand-textLight">
+                        <li><strong>Mở file explorer:</strong></li>
+                        <li><strong>Truy cập ổ đĩa, thư mục:</strong></li>
+                        <li><strong>Tạo thư mục mới:</strong></li>
+                        <li><strong>Vào thư mục vừa tạo:</strong></li>
+                        <li><strong>Tạo tệp tin văn bản:</strong></li>
+                        <li><strong>Đổi tên tệp tin:</strong></li>
+                        <li><strong>Tạo thư mục con:</strong></li>
+                        <li><strong>Sao chép tệp tin:</strong></li>
+                        <li><strong>Di chuyển tệp tin:</strong></li>
+                        <li><strong>Xóa tệp tin:</strong></li>
+                        <li><strong>Xóa vĩnh viễn:</strong></li>
+                        <li><strong>Khôi phục từ thùng rác:</strong></li>
+                    </ul>
+                `
+            },
+            {
+                id: 2,
+                badge: "Bài 2",
+                title: "Thu thập và đánh giá nguồn thông tin tài liệu",
+                icon: "ph-magnifying-glass",
+                desc: "Ảnh hưởng của giao thoa ngôn ngữ mẹ đẻ đến kỹ năng Viết tiếng Anh.",
+                evidenceUrl: "https://drive.google.com/file/d/1S3iHbMnh9ILtGN3pSaIGj3QkotycGq5A/preview",
+                htmlContent: `
+                    <p class="font-bold text-lg mb-6 text-brand-text">BÁO CÁO THU THẬP VÀ ĐÁNH GIÁ NGUỒN THÔNG TIN TÀI LIỆU<br>Chủ đề: Ảnh hưởng của giao thoa ngôn ngữ mẹ đẻ (tiếng Việt) đến kỹ năng Viết tiếng Anh học thuật và bài thi IELTS Writing của người học tại Việt Nam.</p>
+                    
+                    <h3>I. Giới thiệu chủ đề và Mục tiêu tìm kiếm</h3>
+                    <p>Kỹ năng Viết (Writing), đặc biệt là Viết học thuật và trong các bài thi chuẩn hóa như IELTS, luôn đòi hỏi người học không chỉ nắm vững từ vựng, ngữ pháp mà còn phải thay đổi hoàn toàn tư duy logic. Giao thoa ngôn ngữ (L1 Interference) từ tiếng Việt thường dẫn đến các lỗi dịch chuyển (word-for-word translation), sai lệch về cấu trúc bài luận và văn phong. Mục tiêu của báo cáo là thu thập, phân tích các nghiên cứu về những lỗi sai phổ biến do tư duy tiếng mẹ đẻ gây ra, từ đó đề xuất các chiến lược học tập nhằm cải thiện kỹ năng Viết tiếng Anh hiệu quả.</p>
+
+                    <h3>II. Chiến lược và Quá trình tìm kiếm thông tin</h3>
+                    <p>Để đảm bảo tính học thuật và bao quát, quá trình thu thập tài liệu được tiến hành qua các bước:</p>
+                    <ul>
+                        <li><strong>Cơ sở dữ liệu học thuật:</strong> Tìm kiếm trên Google Scholar, ERIC (Education Resources Information Center), ResearchGate và CSDL thư viện.</li>
+                        <li><strong>Từ khóa tìm kiếm:</strong> L1 interference in English writing, Vietnamese learners of English, IELTS Writing difficulties, Academic writing strategies, cross-linguistic influence.</li>
+                        <li><strong>Bộ lọc tài liệu:</strong> Ưu tiên các bài báo khoa học xuất bản từ năm 2018 đến 2026, tập trung vào các nghiên cứu thực nghiệm (phân tích lỗi sai trên bài viết thực tế của người học Việt Nam).</li>
+                    </ul>
+
+                    <h3>III. Phân tích tiêu chí đánh giá độ tin cậy</h3>
+                    <p>Các tài liệu trong danh mục được đánh giá độ tin cậy dựa trên 5 tiêu chí chuẩn:</p>
+                    <ul>
+                        <li><strong>Tác giả:</strong> Là các chuyên gia, giảng viên trong lĩnh vực Giảng dạy tiếng Anh (ELT) hoặc Ngôn ngữ học ứng dụng (Applied Linguistics).</li>
+                        <li><strong>Cơ quan xuất bản:</strong> Ưu tiên các tạp chí khoa học chuyên ngành có phản biện uy tín (như <em>Asian EFL Journal</em>, <em>TESOL Quarterly</em>) hoặc các nhà xuất bản giáo dục hàng đầu (Cambridge, Routledge).</li>
+                        <li><strong>Phương pháp nghiên cứu:</strong> Tính chặt chẽ trong phân tích dữ liệu (ví dụ: nghiên cứu phân tích lỗi - Error Analysis trên mẫu bài luận lớn).</li>
+                        <li><strong>Trích dẫn:</strong> Chỉ số trích dẫn từ các hệ thống dữ liệu học thuật.</li>
+                        <li><strong>Tính cập nhật:</strong> Sự phù hợp của tài liệu với các chuẩn mực kiểm tra, đánh giá tiếng Anh quốc tế hiện hành.</li>
+                    </ul>
+
+                    <h3>IV. Bảng tổng hợp và xếp hạng độ tin cậy</h3>
+                    <div class="overflow-x-auto">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên tài liệu / Tác giả</th>
+                                    <th>Nguồn / Cơ quan xuất bản</th>
+                                    <th>Đánh giá (Tác giả, Phương pháp, Trích dẫn, Cập nhật)</th>
+                                    <th>Xếp hạng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Phân tích lỗi ngữ pháp do tiếng mẹ đẻ trong IELTS Writing... (Nguyễn, T.M., 2024)</td><td>Tạp chí Nghiên cứu Nước ngoài (Bài báo KH)</td><td>Cao: Phân tích thực nghiệm trên 200 bài thi IELTS; dữ liệu rất mới; tác giả uy tín.</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>2</td><td>L1 Interference in Academic Writing... (Tran, H. & Le, V., 2021)</td><td>Asian EFL Journal (Bài báo KH)</td><td>Cao: Tạp chí quốc tế chuyên ngành giáo dục tiếng Anh hàng đầu ở Châu Á.</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>3</td><td>Khắc phục tư duy dịch thuật trong Viết luận tiếng Anh... (Phạm, Đ.K., 2022)</td><td>Tạp chí Ngôn ngữ & Đời sống (Bài báo KH)</td><td>Khá: Đi sâu vào yếu tố văn hóa và lối tư duy đường vòng của người Việt, phương pháp định tính.</td><td>⭐⭐⭐⭐</td></tr>
+                                <tr><td>4</td><td>The impact of Vietnamese rhetorical patterns... (Vu, L.A., 2020)</td><td>TESOL Journal (Bài báo KH)</td><td>Cao: Trích dẫn quốc tế cao, nghiên cứu sâu về cấu trúc tu từ (rhetorical patterns).</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>5</td><td>Hiệu quả của phản hồi đồng cấp (Peer feedback) trong lớp học Viết... (Hoàng, T.T., 2025)</td><td>Tạp chí Khoa học Giáo dục (Bài báo KH)</td><td>Cao: Đề xuất giải pháp khắc phục lỗi thực tiễn; dữ liệu cập nhật mới nhất.</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>6</td><td>Teaching ESL/EFL Reading and Writing (Nation, I.S.P., 2020)</td><td>NXB Routledge (Sách chuyên khảo)</td><td>Cao: Tác giả là cây đại thụ trong ngành ELT; sách lý luận chuẩn mực toàn cầu.</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>7</td><td>IELTS Writing: Strategies for Academic Success (Smith, J., 2023)</td><td>NXB Cambridge University Press (Sách)</td><td>Cao: Nguồn chính thống từ đơn vị đồng sáng lập bài thi IELTS, độ tin cậy tuyệt đối về format.</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>8</td><td>Lỗi tiếng Anh của người Việt và cách khắc phục (Lê, T.H., 2019)</td><td>NXB Giáo dục Việt Nam (Sách)</td><td>Khá: Rất gần gũi và dễ hiểu với sinh viên, tuy nhiên mang tính tổng hợp nhiều hơn nghiên cứu sâu.</td><td>⭐⭐⭐⭐</td></tr>
+                                <tr><td>9</td><td>Báo cáo toàn cầu về dữ liệu điểm thi IELTS (IELTS Official, 2025)</td><td>Website IELTS.org (Nguồn Internet)</td><td>Cao: Số liệu thống kê vĩ mô chính thức, minh bạch về điểm mạnh/yếu của thí sinh VN.</td><td>⭐⭐⭐⭐⭐</td></tr>
+                                <tr><td>10</td><td>Guide to Critical Thinking in Academic Writing (British Council, 2026)</td><td>Website British Council (Nguồn Internet)</td><td>Trung bình - Khá: Tài liệu hướng dẫn thực hành uy tín nhưng thiếu cấu trúc của một nghiên cứu học thuật.</td><td>⭐⭐⭐</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>V. Danh mục tài liệu tham khảo</h3>
+                    <p><strong>Tài liệu tiếng Việt:</strong></p>
+                    <ul>
+                        <li>Hoàng, T.T., 2025. Hiệu quả của phản hồi đồng cấp (Peer feedback) trong lớp học Viết tiếng Anh học thuật tại Việt Nam. <em>Tạp chí Khoa học Giáo dục</em>, 21(2), tr.45-58.</li>
+                        <li>Lê, T.H., 2019. <em>Lỗi tiếng Anh của người Việt và cách khắc phục</em>. Hà Nội: Nhà xuất bản Giáo dục Việt Nam.</li>
+                        <li>Nguyễn, T.M., 2024. Phân tích lỗi ngữ pháp do ảnh hưởng của tiếng mẹ đẻ trong bài thi IELTS Writing Task 2 của người học Việt Nam. <em>Tạp chí Nghiên cứu Nước ngoài</em>, 40(1), tr.112-127.</li>
+                        <li>Phạm, Đ.K., 2022. Khắc phục tư duy dịch thuật trong Viết luận tiếng Anh: Góc nhìn từ giao thoa văn hóa. <em>Tạp chí Ngôn ngữ và Đời sống</em>, 28(4), tr.77-89.</li>
+                    </ul>
+                    <p><strong>Tài liệu tiếng Anh/Quốc tế:</strong></p>
+                    <ul>
+                        <li>British Council, 2026. <em>Guide to Critical Thinking in Academic Writing</em>. <a href="http://www.britishcouncil.org/academic-writing-critical-thinking" target="_blank">http://www.britishcouncil.org/academic-writing-critical-thinking</a></li>
+                        <li>IELTS Official, 2025. Global IELTS Test Taker Performance Data. <a href="http://www.ielts.org/research/demographic-data" target="_blank">http://www.ielts.org/research/demographic-data</a></li>
+                        <li>Nation, I.S.P., 2020. <em>Teaching ESL/EFL Reading and Writing</em>. 2nd ed. New York: Routledge.</li>
+                        <li>Smith, J., 2023. <em>IELTS Writing: Strategies for Academic Success</em>. Cambridge: Cambridge University Press.</li>
+                        <li>Tran, H. và Le, V., 2021. L1 Interference in Academic Writing: A Case Study of Vietnamese EFL Learners. <em>Asian EFL Journal</em>, 25(3), tr.201-220.</li>
+                        <li>Vu, L.A., 2020. The impact of Vietnamese rhetorical patterns on English essay organization. <em>TESOL Journal</em>, 11(2), tr.15-32.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 3,
+                badge: "Bài 3",
+                title: "Sáng tạo với Trí tuệ nhân tạo (Prompt Engineering)",
+                icon: "ph-robot",
+                desc: "Chủ đề Ngôn ngữ (IELTS) & Kinh tế vĩ mô.",
+                evidenceUrl: "https://drive.google.com/file/d/1pUjzzzKFCZIhUieD0yBsM6tsbw4lHjp0/preview",
+                htmlContent: `
+                    <p class="font-bold text-lg mb-6 text-brand-text">Chủ đề Ngôn ngữ (IELTS) & Kinh tế vĩ mô</p>
+
+                    <h3>I. Chi tiết 3 tác vụ và các cấp độ Prompt</h3>
+                    <p><strong>Tác vụ 1: Tóm tắt một bài đọc/tài liệu học thuật (Chủ đề: Môi trường/IELTS Reading)</strong></p>
+                    <ul>
+                        <li><strong>Prompt Cơ bản:</strong> Tóm tắt bài đọc sau về biến đổi khí hậu và rạn san hô.</li>
+                        <li><strong>Prompt Cải tiến:</strong> Viết 01 đoạn văn tóm tắt chung (khoảng 80–120 từ), nêu rõ nội dung chính của đoạn văn. Trình bày 03 gạch đầu dòng nêu các ý hoặc thông tin quan trọng nhất được đề cập trong đoạn văn.</li>
+                        <li><strong>Prompt Nâng cao (Role prompting + Constraints):</strong> Đóng vai là một giáo viên dạy IELTS chuyên nghiệp. Hãy tóm tắt đoạn văn học thuật dưới đây để một học sinh đang ở band điểm 5.0 có thể hiểu được. <strong>Yêu cầu cấu trúc:</strong> Một câu chủ đề tóm gọn ý chính (Main idea). Ba từ vựng khó trong bài kèm giải nghĩa và phiên âm. Tóm tắt 3 luận điểm chính dưới dạng bullet point ngắn gọn.</li>
+                    </ul>
+
+                    <p><strong>Tác vụ 2: Giải thích một khái niệm phức tạp (Chủ đề: Kinh tế / Đầu tư)</strong></p>
+                    <ul>
+                        <li><strong>Prompt Cơ bản:</strong> Giải thích khái niệm lạm phát là gì?</li>
+                        <li><strong>Prompt Cải tiến:</strong> Giải thích khái niệm "Lạm phát" (Inflation) trong kinh tế học. Trình bày rõ nguyên nhân gây ra lạm phát và ảnh hưởng của nó đến giá cả hàng hóa hàng ngày.</li>
+                        <li><strong>Prompt Nâng cao (Role + Chain-of-Thought):</strong> Đóng vai là một chuyên gia tài chính cá nhân. Hãy giải thích khái niệm "Lạm phát" cho một sinh viên đại học chưa biết gì về kinh tế, sử dụng phương pháp tư duy từng bước (Chain-of-thought): Bước 1: Đưa ra một ví dụ thực tế, gần gũi (ví dụ: sự thay đổi giá của một bát phở sau 5 năm) để định nghĩa lạm phát. Bước 2: Giải thích logic đằng sau hiện tượng này (tiền lưu thông nhiều -> sức mua giảm -> giá tăng). Bước 3: Đưa ra 2 lời khuyên ngắn gọn để bảo vệ tiền tiết kiệm cá nhân khỏi lạm phát.</li>
+                    </ul>
+
+                    <p><strong>Tác vụ 3: Tạo bộ câu hỏi ôn tập (Chủ đề: Lịch sử Thế giới)</strong></p>
+                    <ul>
+                        <li><strong>Prompt Cơ bản:</strong> Tạo bài tập về Chiến tranh Thế giới thứ 2.</li>
+                        <li><strong>Prompt Cải tiến:</strong> Tạo bộ 5 câu hỏi trắc nghiệm (có kèm đáp án ở cuối) để ôn tập về nguyên nhân bùng nổ Chiến tranh Thế giới thứ 2.</li>
+                        <li><strong>Prompt Nâng cao (Few-shot examples):</strong> Bạn là người ra đề thi môn Lịch sử. Hãy tạo một bộ 4 câu hỏi ôn tập về "Thế chiến 2" với độ khó tăng dần. Dưới đây là định dạng mẫu bạn bắt buộc phải tuân theo: Ví dụ định dạng: Câu 1 (Mức độ: Dễ - Trắc nghiệm): Sự kiện nào đánh dấu sự khởi đầu của Thế chiến 2? A... B... C... D... -> Đáp án: ... Câu 4 (Mức độ: Khó - Tự luận): Phân tích tác động của... -> Gợi ý trả lời: ... Hãy áp dụng định dạng trên để hoàn thành bộ câu hỏi.</li>
+                    </ul>
+
+                    <h3>II. Bảng so sánh và Phân tích kết quả</h3>
+                    <div class="overflow-x-auto">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th>Tiêu chí</th>
+                                    <th>Prompt Cơ bản</th>
+                                    <th>Prompt Cải tiến</th>
+                                    <th>Prompt Nâng cao</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Độ chi tiết</strong></td>
+                                    <td>Chung chung, AI tự quyết định độ dài và nội dung.</td>
+                                    <td>Chi tiết hơn, đi đúng trọng tâm yêu cầu.</td>
+                                    <td>Rất chi tiết, kiểm soát hoàn toàn được đầu ra của AI.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bố cục trình bày</strong></td>
+                                    <td>Thường là các đoạn văn dài, khối văn bản đặc (Text block).</td>
+                                    <td>Dễ đọc hơn, có gạch đầu dòng theo yêu cầu.</td>
+                                    <td>Có tính thẩm mỹ cao, phân tầng thông tin rõ ràng theo format quy định.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Độ phù hợp</strong></td>
+                                    <td>Có thể quá dễ hoặc quá khó so với trình độ người dùng.</td>
+                                    <td>Đáp ứng đủ nhu cầu thông tin.</td>
+                                    <td>Hoàn hảo cho đối tượng mục tiêu (có ví dụ thực tế, giải nghĩa từ vựng).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>III. Phân tích lý do & Tổng hợp nguyên tắc</h3>
+                    <p>Tại sao Prompt Nâng cao hiệu quả hơn?</p>
+                    <ul>
+                        <li><strong>Thiết lập bối cảnh (Context/Role):</strong> Việc gán vai diễn (Chuyên gia tài chính, Giáo viên) giúp AI điều chỉnh "giọng văn" (tone of voice) và mức độ chuyên môn của từ vựng cho phù hợp.</li>
+                        <li><strong>Định dạng kỳ vọng (Formatting):</strong> Việc cung cấp mẫu (Few-shot) hoặc yêu cầu rõ cấu trúc (3 bullet points, bảng biểu) loại bỏ sự phỏng đoán của AI, giúp kết quả có thể sử dụng được ngay lập tức.</li>
+                        <li><strong>Chia nhỏ logic (Chain-of-thought):</strong> Ép AI suy nghĩ theo từng bước giúp các khái niệm phức tạp được bóc tách mượt mà, tránh việc nhồi nhét lý thuyết suông.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 4,
+                badge: "Bài 4",
+                title: "Ứng dụng công cụ cộng tác trực tuyến trong dự án",
+                icon: "ph-users-three",
+                desc: "Học phần Business Communication, dự án viết Đề xuất không chính thức.",
+                evidenceUrl: "https://drive.google.com/file/d/1kCRDj8LINXcGFU66Y6T-TUx9oYHNq-wb/preview",
+                htmlContent: `
+                    <p class="font-bold text-lg mb-6 text-brand-text">BÁO CÁO CÁ NHÂN: ỨNG DỤNG CÔNG CỤ CỘNG TÁC TRỰC TUYẾN TRONG DỰ ÁN</p>
+
+                    <h3>I. GIỚI THIỆU CHUNG VỀ DỰ ÁN VÀ VAI TRÒ CÁ NHÂN</h3>
+                    <p>Trong học phần Business Communication, nhóm 3 gồm 4 thành viên chúng em đã thực hiện một dự án viết Đề xuất không chính thức (Informal Proposal). Khách hàng giả định là Ban Giám đốc Tập đoàn Tân Hiệp Phát. Vấn đề cốt lõi dự án cần giải quyết là sự sụt giảm niềm tin của người tiêu dùng đối với sản phẩm Trà Xanh Không Độ do những lo ngại về chất lượng, đặc biệt là hương vị quá ngọt và thiếu độ đậm của trà.</p>
+
+                    <h3>II. NHẬT KÝ MINH CHỨNG VÀ QUÁ TRÌNH THỰC HIỆN TÁC VỤ CÁ NHÂN</h3>
+                    <p><strong>1. Soạn thảo chuyên môn trên Google Docs (Nhóm công cụ Soạn thảo)</strong></p>
+                    <p>Google Docs là nền tảng cốt lõi để 6 người cùng nhau ráp nối các phần ý tưởng thành một văn bản hoàn chỉnh.</p>
+                    <ul>
+                        <li><strong>Tác vụ thực hiện:</strong> Với vai trò Survey Specialist, em chịu trách nhiệm gõ trực tiếp phần Phase 1: Measure Overall Customer Satisfaction trên Docs. Em đã chi tiết hóa các hạng mục như: câu hỏi nhân khẩu học (demographic), thang đo độ hài lòng (satisfaction items) và câu hỏi mở về độ ngọt (sweetness levels).</li>
+                        <li><strong>Quá trình cộng tác:</strong> Khi bạn phụ trách viết phần Background đề cập đến "SERVQUAL Dimensions", em đã bôi đen cụm từ này và dùng tính năng Thêm bình luận (Add Comment) để yêu cầu bạn ấy bổ sung thêm chú thích rõ hơn về 2 yếu tố "Reliability and Assurance" (Độ tin cậy và Sự đảm bảo) nhằm củng cố tính thuyết phục cho Đề xuất.</li>
+                    </ul>
+
+                    <p><strong>2. Lưu trữ tài nguyên hệ thống trên Google Drive (Nhóm công cụ Lưu trữ)</strong></p>
+                    <p>Để có dữ liệu viết Proposal, nhóm phải tham khảo nhiều tài liệu nghiên cứu thị trường. Việc lưu trữ không gọn gàng sẽ dẫn đến thất lạc thông tin.</p>
+                    <ul>
+                        <li><strong>Tác vụ thực hiện:</strong> Em khởi tạo thư mục gốc [ENG3071] Nhóm 3 - Informal Proposal và chia sẻ quyền chỉnh sửa cho toàn bộ nhóm. Em lập cấu trúc thư mục con một cách khoa học và đặt tên theo cú pháp chuẩn đẻ tránh việc bị lỡ mất thông tin, tài liệu quan trọng</li>
+                    </ul>
+
+                    <p><strong>4. Chủ trì thảo luận chiến lược qua Google Meet (Nhóm công cụ Giao tiếp)</strong></p>
+                    <p>Giai đoạn đầu của dự án đòi hỏi việc brainstorming (động não) liên tục để tìm ra cốt lõi vấn đề của sản phẩm Trà Xanh Không Độ. Chat qua Zalo/Messenger không thể giải quyết được các vấn đề học thuật phức tạp.</p>
+                    <ul>
+                        <li><strong>Tác vụ thực hiện:</strong> Với vai trò Project Manager, em định kỳ tổ chức các buổi họp "Sync-up" 30 phút trên Google Meet vào buổi tối. Trong buổi họp chốt Timeline, em đã Chia sẻ màn hình (Presenting) để cùng thảo luận và hoàn thiện nội dung báo cáo của dự án.</li>
+                    </ul>
+
+                    <h3>III. PHÂN TÍCH HIỆU QUẢ CỦA CÔNG CỤ ĐỐI VỚI CÔNG VIỆC CÁ NHÂN</h3>
+                    <p>Việc tích hợp công cụ trực tuyến vào vị trí Quản lý dự án mang lại 3 ưu điểm vượt trội cho cá nhân tôi:</p>
+                    <ul>
+                        <li><strong>Duy trì "Single Source of Truth" (Nguồn dữ liệu duy nhất):</strong> Với Google Docs, nhóm không bị rơi vào ma trận các file Word "Proposal_BanCuoi", "Proposal_BanCuoi_SuaLoi". Mọi người gõ vào một tệp duy nhất. Tính năng lịch sử chỉnh sửa (Version History) giúp em (với tư cách quản lý) kiểm soát được ai đã làm phần việc của mình lúc mấy giờ.</li>
+                        <li><strong>Rút ngắn thời gian ra quyết định:</strong> Việc sử dụng Google Meet kèm chia sẻ màn hình để cùng nhau xem xét lại bảng Budget $9000 giúp nhóm thống nhất các con số về giờ công (Estimated Hours) và đơn giá (Rate) chỉ trong 15 phút, tránh việc nhắn tin hiểu lầm qua lại kéo dài cả ngày.</li>
+                    </ul>
+
+                    <h3>IV. THÁCH THỨC VÀ GIẢI PHÁP TRONG QUÁ TRÌNH TƯƠNG TÁC NHÓM</h3>
+                    <p><strong>Vấn đề:</strong> Do hạn nộp bài gấp, có thời điểm 3-4 thành viên cùng vào Docs chỉnh sửa. Trong lúc em đang viết căn lề cho phần thư gửi (To: Board of Directors), một bạn khác lại bấm "Enter" liên tục ở phần trên khiến định dạng văn bản của em bị đẩy xuống trang khác, rất ức chế.</p>
+                    <p><strong>Cách giải quyết:</strong> Em thiết lập quy tắc "Sở hữu đoạn văn". Mỗi thành viên sẽ được highlight nội dung mình phụ trách bằng một màu nền nhạt khác nhau. Thành viên khác không được phép xóa sửa phần màu của người khác. Khi muốn sửa lỗi chính tả ở phần của đồng đội, bắt buộc phải dùng chế độ "Suggesting" (Đề xuất) thay vì "Editing" (Chỉnh sửa trực tiếp).</p>
+                `
+            },
+            {
+                id: 5,
+                badge: "Bài 5",
+                title: "Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung",
+                icon: "ph-paint-brush",
+                desc: "Thiết kế Lịch để bàn giáo dục giới tính dành cho trẻ tiểu học.",
+                evidenceUrl: "https://drive.google.com/file/d/1HmENczRtbiLXG3R9fI1-bmIfHatXL7bn/preview",
+                htmlContent: `
+                    <p class="font-bold text-lg mb-6 text-brand-text">BÁO CÁO: SỬ DỤNG AI TẠO SINH ĐỂ HỖ TRỢ SÁNG TẠO NỘI DUNG</p>
+                    
+                    <h3>I. Tổng Quan Dự Án</h3>
+                    <p><strong>1. Mục tiêu</strong><br>Thành thạo việc sử dụng các công cụ AI tạo sinh để hỗ trợ quá trình sáng tạo, từ khâu lên ý tưởng nội dung, thiết kế hình ảnh minh họa cho đến việc hoàn thiện một sản phẩm nội dung số mang tính giáo dục.</p>
+                    <p><strong>2. Lựa chọn dự án</strong><br>Em đã chọn thực hiện một dự án thiết kế Lịch để bàn giáo dục giới tính dành cho trẻ tiểu học với thông điệp: "Cùng lớn khôn an toàn". Dự án này yêu cầu sự kết hợp giữa ngôn từ phù hợp với lứa tuổi, hình ảnh minh họa tươi sáng, thân thiện và khả năng truyền đạt những kiến thức nhạy cảm một cách trực quan, dễ hiểu.</p>
+                    <p><strong>3. Danh sách các công cụ AI đã sử dụng</strong><br>Để hoàn thành dự án, em đã sử dụng kết hợp 3 công cụ AI tạo sinh sau:</p>
+                    <ul>
+                        <li><strong>Công cụ AI tạo văn bản:</strong> ChatGPT để lên khung nội dung cho các trang lịch, gợi ý thông điệp giáo dục và viết prompt (lời nhắc) chi tiết cho việc tạo hình ảnh.</li>
+                        <li><strong>Công cụ AI tạo hình ảnh:</strong> Bing Image Creator (DALL-E 3) để chuyển đổi các prompt văn bản thành hình ảnh minh họa sinh động, đồng nhất về phong cách.</li>
+                        <li><strong>Công cụ AI hỗ trợ thiết kế:</strong> Canva để chỉnh sửa, cắt ghép, sắp xếp bố cục (layout), thêm typography (chữ) tiếng Việt và hoàn thiện các trang lịch.</li>
+                    </ul>
+
+                    <h3>II. Quy Trình Sử Dụng AI & Minh Chứng Quá Trình Làm Việc</h3>
+                    <p><strong>Bước 1: Lên ý tưởng nội dung (Sử dụng AI tạo văn bản)</strong><br>Đầu tiên, em sử dụng AI tạo văn bản để phác thảo cấu trúc nội dung cho bộ lịch.</p>
+                    <ul>
+                        <li><strong>Mục tiêu:</strong> Xác định các chủ đề giáo dục giới tính cốt lõi cho trẻ em theo từng tuần/tháng (ví dụ: Ranh giới cá nhân, Cảm xúc, An toàn thân thể).</li>
+                        <li><strong>Kết quả:</strong> AI đã giúp em chia nhỏ các chủ đề lớn thành các thông điệp ngắn gọn, dễ hiểu như: "Vùng đồ lót", "Quyền nói Không", "Vòng tròn cảm xúc".</li>
+                    </ul>
+                    
+                    <p><strong>Bước 2: Sáng tạo hình ảnh minh họa "Tuần 1: Ranh giới - Vùng đồ lót" (Sử dụng AI tạo hình ảnh)</strong><br>Sau khi có nội dung, em sử dụng AI để tạo hình ảnh minh họa. Yêu cầu là phong cách kỹ thuật số tươi sáng, thân thiện với trẻ em.</p>
+                    <ul>
+                        <li><strong>Quá trình thực hiện:</strong> Em đã viết một prompt chi tiết mô tả bối cảnh công viên xanh, hai nhân vật trẻ em đứng đối xứng với trang phục và phụ kiện cụ thể (quần lót xanh ô tô, quần lót hồng, vòng bảo vệ). Em cũng yêu cầu AI chèn sẵn một số văn bản tiếng Việt.</li>
+                        <li><strong>Prompt đã sử dụng:</strong> "Giúp tôi tạo hình ảnh minh hoạ kỹ thuật số tươi sáng, thân thiện với trẻ em... Cả hai có vòng bảo vệ bụng màu vàng. Giữa họ là tấm khiên xanh với trái tim đỏ và văn bản: 'ĐÂY LÀ VÙNG RIÊNG TƯ CỦA CON!'..."</li>
+                        <li><strong>Kết quả:</strong> AI tạo hình ảnh đã xuất ra một bức tranh minh họa rất sát với yêu cầu về phong cách và bố cục. Các nhân vật dễ thương, bối cảnh phù hợp. Tuy nhiên, AI gặp khó khăn nhẹ trong việc render text tiếng Việt chính xác hoàn toàn (một lỗi phổ biến của AI tạo ảnh).</li>
+                    </ul>
+
+                    <p><strong>Bước 3: Phát triển chuỗi hình ảnh "Vòng tròn cảm xúc" & Duy trì phong cách (Sử dụng AI tạo hình ảnh)</strong><br>Để bộ lịch có tính nhất quán, các trang tiếp theo cần giữ nguyên nét vẽ của trang đầu.</p>
+                    <ul>
+                        <li><strong>Quá trình thực hiện:</strong> Em sử dụng tính năng tạo hình ảnh dựa trên hình ảnh tham chiếu (Image-to-Image) hoặc prompt kế thừa để yêu cầu AI giữ nguyên phong cách.</li>
+                        <li><strong>Prompt:</strong> "Tôi cần bạn tạo hình ảnh với phong cách, cách vẽ, cách trình bày giống như ảnh đã được đính kèm. Yêu cầu: Thay cho phần chữ 'tuần 1' ranh giới vùng đồ lót, thay bằng 'Tuần 1: Cảm xúc tuổi lớn'. Nội dung ảnh: Vòng tròn cảm xúc gồm vui, buồn, lo lắng, tức giận, ngạc nhiên."</li>
+                        <li><strong>Kết quả:</strong> AI đã thực hiện xuất sắc việc duy trì phong cách minh họa (nét vẽ, màu sắc, bối cảnh công viên) từ bức ảnh trước. Bố cục "Vòng tròn cảm xúc" được sắp xếp rõ ràng, biểu cảm của các bé rất sinh động và trực quan, đáp ứng hoàn hảo mục tiêu giáo dục.</li>
+                    </ul>
+
+                    <p><strong>Bước 4: Chỉnh sửa, Tích hợp & Hoàn thiện dự án (Sử dụng Canva)</strong><br>Các hình ảnh do AI tạo ra (raw images) rất đẹp nhưng chưa thể sử dụng ngay lập tức làm sản phẩm cuối cùng. Chúng cần được đưa vào một layout chuyên nghiệp và xử lý các vấn đề về typography (text tiếng Việt do AI tạo thường bị lỗi font).</p>
+                    <ul>
+                        <li><strong>Quá trình thực hiện:</strong> Em đưa các hình ảnh minh họa từ AI vào Canva.</li>
+                        <li><strong>Xử lý Text:</strong> Em đã sử dụng các công cụ xóa nền hoặc che đi các đoạn text tiếng Việt bị lỗi mà AI tạo ảnh đã sinh ra. Sau đó, em chèn lại các đoạn text này bằng các font chữ thân thiện, dễ đọc trên Canva (ví dụ: "Cùng LỚN KHÔN AN TOÀN", "Lịch để bàn giáo dục giới tính...").</li>
+                        <li><strong>Thiết kế Layout (Bố cục):</strong> Như thể hiện, em đã sắp xếp hình ảnh minh họa (gia đình và các em bé) làm trung tâm. Bên trái, em sử dụng Canva để thiết kế một menu trực quan với các icon và từ khóa ("Yêu thương bản thân", "An toàn", "Tôn trọng"...).</li>
+                        <li><strong>Tích hợp:</strong> Sự kết hợp giữa minh họa sống động từ AI (DALL-E) và khả năng xử lý typography/layout linh hoạt của Canva đã tạo ra một trang bìa (và các trang nội dung) hoàn chỉnh, mang tính ứng dụng cao.</li>
+                    </ul>
+
+                    <h3>III. Phân Tích Vai Trò Của AI Trong Quá Trình Sáng Tạo</h3>
+                    <p>Sau quá trình thực hiện dự án "Lịch giáo dục giới tính", em rút ra những phân tích sau:</p>
+                    <p><strong>1. Những phần AI làm tốt và những phần còn hạn chế</strong></p>
+                    <div class="overflow-x-auto">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th>Khía cạnh</th>
+                                    <th>Phần AI làm tốt</th>
+                                    <th>Phần AI còn hạn chế</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Lên ý tưởng (Ideation)</strong></td>
+                                    <td>Nhanh chóng cung cấp cấu trúc nội dung, gợi ý các chủ đề phù hợp với lứa tuổi tâm lý của trẻ em.</td>
+                                    <td>Đôi khi đưa ra các gợi ý quá chung chung, cần con người chọn lọc và cụ thể hóa bối cảnh văn hóa.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sáng tạo hình ảnh (Visuals)</strong></td>
+                                    <td>Dịch các ý tưởng trừu tượng ("Ranh giới cá nhân", "Cảm xúc") thành các minh họa trực quan, sinh động, đúng phong cách yêu cầu chỉ trong thời gian ngắn. Khả năng duy trì phong cách đồ họa khá tốt nếu biết cách prompt.</td>
+                                    <td>Hiển thị văn bản (Typography): Rất yếu trong việc render chính xác các ngôn ngữ có dấu như tiếng Việt, thường sinh ra chữ giả (gibberish) hoặc sai lỗi chính tả.<br><br>Chi tiết nhỏ: Đôi khi AI có thể vẽ sai số lượng ngón tay hoặc chi tiết quần áo nếu prompt không quản lý chặt.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p><strong>2. Cách AI thay đổi quy trình sáng tạo của em</strong></p>
+                    <ul>
+                        <li><strong>Chuyển từ "Người vẽ" sang "Người đạo diễn":</strong> Thay vì tốn hàng chục giờ để vẽ tay từng nhân vật, em đóng vai trò là Giám đốc Nghệ thuật (Art Director). Công việc chính của em là: Viết prompt chi tiết (kịch bản hình ảnh), lựa chọn các kết quả tốt nhất từ AI, và lắp ráp chúng lại.</li>
+                        <li><strong>Tốc độ hóa quy trình prototyping:</strong> Em có thể thử nghiệm nhiều phong cách minh họa khác nhau trong vài phút để chọn ra phong cách thân thiện với trẻ em nhất, điều mà thiết kế truyền thống sẽ tốn rất nhiều thời gian phác thảo.</li>
+                    </ul>
+
+                    <p><strong>3. Các vấn đề đạo đức cần cân nhắc</strong></p>
+                    <ul>
+                        <li><strong>Tính an toàn và nhạy cảm của nội dung:</strong> Khi sử dụng AI để tạo hình ảnh và nội dung về giáo dục giới tính cho trẻ em, rủi ro lớn nhất là AI có thể tạo ra các hình ảnh không phù hợp hoặc nội dung gây hiểu lầm. Em đã phải kiểm duyệt cực kỳ gắt gao từng kết quả đầu ra (prompt filtering và kết quả hình ảnh) để đảm bảo tính trong sáng, an toàn tuyệt đối và tính sư phạm của sản phẩm.</li>
+                        <li><strong>Bản quyền hình ảnh:</strong> Dù là do AI tạo ra, việc sử dụng các hình ảnh này cho mục đích thương mại trong thực tế cần được cân nhắc kỹ về chính sách của từng nền tảng AI.</li>
+                    </ul>
+
+                    <h3>IV. Sản Phẩm Cuối Cùng</h3>
+                    <p>(Được trình bày chi tiết trong file minh chứng PDF)</p>
+
+                    <h3>V. Kết Luận</h3>
+                    <p>Dự án thiết kế lịch "Cùng lớn khôn an toàn" đã chứng minh rõ ràng vai trò trợ lý đắc lực của công cụ AI tạo sinh. AI không thay thế được tư duy giáo dục, thẩm mỹ sắp xếp hay khả năng kiểm duyệt nội dung nhạy cảm của con người. Thay vào đó, AI đóng vai trò như một cỗ máy sản xuất nguyên liệu thô (minh họa, dàn ý) với tốc độ phi thường. Bằng cách kết hợp sức mạnh tạo hình của AI với công cụ thiết kế chuyên nghiệp như Canva và sự tinh chỉnh của con người, chúng ta có thể tạo ra các sản phẩm nội dung số chất lượng cao, mang lại giá trị thực tiễn và giáo dục sâu sắc.</p>
+                `
+            },
+            {
+                id: 6,
+                badge: "Bài 6",
+                title: "Sử dụng AI có trách nhiệm và đạo đức",
+                icon: "ph-shield-check",
+                desc: "Nghiên cứu chính sách của trường đại học về việc sử dụng AI.",
+                evidenceUrl: "https://drive.google.com/file/d/1Jz3_3OtKYWfQrveaWr5Vmb3Nju4cklvk/preview",
+                htmlContent: `
+                    <p class="font-bold text-lg mb-6 text-brand-text">BÁO CÁO: SỬ DỤNG AI CÓ TRÁCH NHIỆM VÀ ĐẠO ĐỨC TRONG HỌC TẬP VÀ NGHIÊN CỨU</p>
+
+                    <h3>I. Nghiên cứu chính sách của trường đại học về việc sử dụng AI trong học tập và nghiên cứu</h3>
+                    <p><strong>1. Chính sách sử dụng AI của Trường Đại học Ngoại ngữ – Đại học Quốc gia Hà Nội (ULIS)</strong></p>
+                    <p>Sự phát triển mạnh mẽ của trí tuệ nhân tạo (Artificial Intelligence - AI) trong những năm gần đây đã tạo ra nhiều thay đổi đối với hoạt động dạy học và nghiên cứu trong giáo dục đại học. Các công cụ như ChatGPT, Gemini hay Microsoft Copilot giúp sinh viên tiếp cận tri thức nhanh hơn, hỗ trợ giải quyết nhiều nhiệm vụ học tập như tìm kiếm thông tin, tổng hợp tài liệu, dịch thuật hay chỉnh sửa văn bản. Tuy nhiên, AI cũng đặt ra nhiều vấn đề liên quan đến đạo đức học thuật, tính trung thực và quyền sở hữu trí tuệ. Chính vì vậy, nhiều trường đại học trên thế giới cũng như tại Việt Nam đã ban hành những định hướng nhằm giúp người học sử dụng AI một cách có trách nhiệm.</p>
+                    <p>Tại Trường Đại học Ngoại ngữ – Đại học Quốc gia Hà Nội (ULIS), mặc dù hiện nay chưa có một quy chế riêng dành cho việc sử dụng AI trong học tập, sinh viên vẫn phải tuân thủ các quy định về liêm chính học thuật của Đại học Quốc gia Hà Nội và các quy chế đào tạo hiện hành. Theo tinh thần của các quy định này, AI được xem là công cụ hỗ trợ học tập, không phải là công cụ thay thế hoàn toàn quá trình nghiên cứu và sáng tạo của người học. Sinh viên được phép sử dụng AI để tìm ý tưởng, giải thích kiến thức, hỗ trợ dịch thuật, kiểm tra ngữ pháp hoặc gợi ý bố cục bài viết. Tuy nhiên, người học phải chịu trách nhiệm về toàn bộ nội dung cuối cùng của bài làm. Mọi thông tin do AI tạo ra cần được kiểm chứng thông qua các nguồn học thuật hoặc tài liệu chính thống trước khi sử dụng. Bên cạnh đó, nếu môn học hoặc giảng viên yêu cầu, sinh viên cần minh bạch trong việc khai báo quá trình sử dụng AI nhằm đảm bảo tính trung thực học thuật.</p>
+                    <p>Ngoài ra, việc sử dụng AI để viết toàn bộ bài luận, làm bài kiểm tra, tạo dữ liệu nghiên cứu giả hoặc sao chép nguyên văn nội dung do AI tạo ra và nộp dưới tên của mình đều được xem là hành vi không phù hợp với tinh thần liêm chính học thuật. Vì vậy, AI chỉ nên đóng vai trò là người hỗ trợ, còn người học mới là chủ thể chịu trách nhiệm về kết quả học tập và nghiên cứu của mình.</p>
+
+                    <h3>II. Thực hiện một nhiệm vụ học tập với sự hỗ trợ của AI</h3>
+                    <p>Để trải nghiệm việc sử dụng AI trong học tập, tôi lựa chọn nhiệm vụ chuẩn bị một bài thuyết trình với chủ đề "Tác động của trí tuệ nhân tạo đối với giáo dục đại học" . Đây là chủ đề có nhiều góc nhìn khác nhau và đòi hỏi phải tổng hợp thông tin từ nhiều nguồn đáng tin cậy. Trong quá trình thực hiện, tôi sử dụng ChatGPT như một công cụ hỗ trợ nhằm xây dựng bố cục, gợi ý nội dung, tóm tắt tài liệu và cải thiện cách diễn đạt. Tuy nhiên, toàn bộ nội dung cuối cùng đều được tôi xem xét, chỉnh sửa và chịu trách nhiệm.</p>
+                    <p>Ở giai đoạn đầu, tôi sử dụng AI để xây dựng bố cục cho bài thuyết trình. <strong>Prompt đầu tiên được sử dụng là:</strong> "Đóng vai một giảng viên đại học. Hãy xây dựng dàn ý cho bài thuyết trình 10 phút về chủ đề 'Tác động của trí tuệ nhân tạo đối với giáo dục đại học'. Bố cục gồm phần mở đầu, nội dung chính và kết luận." AI đề xuất một dàn ý gồm các phần: giới thiệu về AI, ứng dụng của AI trong giáo dục, lợi ích, thách thức và các khuyến nghị khi sử dụng AI. Sau khi xem xét, tôi nhận thấy bố cục này khá hợp lý nhưng vẫn còn mang tính khái quát. Vì vậy, tôi điều chỉnh lại thứ tự các nội dung và bổ sung thêm phần phân tích về việc sử dụng AI trong các trường đại học tại Việt Nam để bài thuyết trình gần gũi hơn với người nghe.</p>
+                    <p>Tiếp theo, tôi sử dụng AI để tìm các ví dụ minh họa cho từng nội dung. <strong>Prompt được sử dụng là:</strong> "Hãy đưa ra các ví dụ thực tế về việc ứng dụng AI trong giáo dục đại học tại Việt Nam và trên thế giới. Chỉ sử dụng các ví dụ phổ biến, dễ hiểu và có nguồn tham khảo." AI gợi ý nhiều ví dụ liên quan đến việc sử dụng ChatGPT trong học tập, các nền tảng học ngoại ngữ tích hợp AI và việc ứng dụng AI trong quản lý học tập tại một số trường đại học. Tuy nhiên, tôi không sử dụng trực tiếp các ví dụ này mà tiến hành kiểm tra lại thông tin trên các trang web chính thức và các bài báo khoa học để đảm bảo tính chính xác. Một số ví dụ không có nguồn rõ ràng đã được loại bỏ và thay thế bằng các dẫn chứng đáng tin cậy hơn.</p>
+                    <p>Sau đó, tôi tiếp tục sử dụng AI để hỗ trợ tóm tắt nội dung cho các slide trình chiếu thông qua <strong>prompt:</strong> "Hãy tóm tắt nội dung sau thành các ý chính để trình bày trên một slide PowerPoint. Mỗi slide không quá năm gạch đầu dòng và sử dụng ngôn ngữ ngắn gọn, dễ hiểu." Đầu ra của AI giúp tôi rút gọn các đoạn văn dài thành những ý chính phù hợp với hình thức trình chiếu. Tuy nhiên, tôi vẫn chỉnh sửa lại cách diễn đạt để phù hợp với phong cách trình bày của bản thân và tránh việc sao chép nguyên văn nội dung do AI tạo ra.</p>
+                    <p>Cuối cùng, tôi sử dụng AI để kiểm tra ngữ pháp và cải thiện phần lời nói khi thuyết trình. <strong>Prompt được sử dụng là:</strong> "Hãy chỉnh sửa đoạn thuyết trình sau theo phong cách tự nhiên, mạch lạc và phù hợp với bài trình bày trước lớp." AI đã đề xuất một số cách diễn đạt ngắn gọn và dễ hiểu hơn. Sau khi tham khảo, tôi lựa chọn những gợi ý phù hợp và tiếp tục chỉnh sửa để bài nói mang dấu ấn cá nhân.</p>
+                    <p>Trong suốt quá trình thực hiện, tôi nhận thấy AI giúp tiết kiệm đáng kể thời gian tìm kiếm thông tin, hỗ trợ sắp xếp ý tưởng và cải thiện chất lượng bài thuyết trình. Tuy nhiên, AI vẫn tồn tại hạn chế khi đôi lúc đưa ra thông tin chưa chính xác hoặc thiếu nguồn tham khảo rõ ràng. Vì vậy, tôi luôn kiểm chứng các thông tin bằng Google Scholar, các bài báo khoa học và các trang web chính thức trước khi đưa vào bài trình bày.</p>
+                    <p>Để đảm bảo tính minh bạch, nếu giảng viên yêu cầu, tôi sẽ ghi chú ở cuối bài thuyết trình rằng: <strong>AI Disclosure:</strong> Bài thuyết trình có sử dụng ChatGPT để hỗ trợ xây dựng dàn ý, tóm tắt tài liệu và chỉnh sửa cách diễn đạt. Toàn bộ nội dung cuối cùng đã được người thực hiện kiểm chứng, chỉnh sửa và chịu trách nhiệm.</p>
+
+                    <h3>III. Phân tích các vấn đề đạo đức liên quan đến việc sử dụng AI trong học thuật</h3>
+                    <p>Việc AI ngày càng được ứng dụng rộng rãi trong giáo dục mang lại nhiều lợi ích nhưng đồng thời cũng đặt ra không ít thách thức về đạo đức học thuật. Một trong những vấn đề quan trọng nhất là ranh giới giữa việc sử dụng AI như một công cụ hỗ trợ và hành vi gian lận học thuật.</p>
+                    <p>Theo quan điểm của tôi, AI hoàn toàn có thể được sử dụng để giải thích kiến thức, gợi ý ý tưởng, hỗ trợ tìm kiếm thông tin hoặc kiểm tra ngữ pháp. Những hoạt động này giúp sinh viên học tập hiệu quả hơn mà vẫn đảm bảo vai trò chủ động của người học. Tuy nhiên, nếu người học yêu cầu AI viết toàn bộ bài luận, làm bài kiểm tra hoặc hoàn thành các nhiệm vụ đánh giá thay mình rồi nộp như sản phẩm cá nhân thì đây là hành vi gian lận học thuật. Khi đó, kết quả đánh giá không còn phản ánh đúng năng lực thực sự của sinh viên.</p>
+                    <p>Bên cạnh đó, quyền sở hữu trí tuệ cũng là một vấn đề đáng quan tâm. AI được huấn luyện từ khối lượng dữ liệu rất lớn nên đôi khi có thể tạo ra nội dung tương đồng với các nguồn đã công bố. Nếu sinh viên sao chép nguyên văn đầu ra của AI mà không chỉnh sửa hoặc không minh bạch về việc sử dụng AI, điều này có thể dẫn đến vi phạm quy định về đạo văn. Ngoài ra, AI đôi khi còn tạo ra những tài liệu tham khảo không tồn tại hoặc thông tin sai lệch (AI hallucination). Vì vậy, người học cần kiểm chứng mọi thông tin trước khi đưa vào bài làm và chỉ sử dụng các nguồn học thuật đáng tin cậy.</p>
+                    <p>AI cũng có ảnh hưởng hai mặt đối với quá trình học tập. Ở góc độ tích cực, AI giúp sinh viên tiếp cận tri thức nhanh hơn, cá nhân hóa việc học, hỗ trợ luyện ngoại ngữ, tiết kiệm thời gian tổng hợp tài liệu và nâng cao hiệu quả học tập. Tuy nhiên, nếu quá phụ thuộc vào AI, người học có thể giảm khả năng tư duy phản biện, kỹ năng viết, kỹ năng nghiên cứu và giải quyết vấn đề. Do đó, AI chỉ phát huy giá trị khi được sử dụng như một công cụ hỗ trợ chứ không phải là sự thay thế cho quá trình học tập và sáng tạo của con người.</p>
+
+                    <h3>IV. Bộ nguyên tắc cá nhân khi sử dụng AI trong học tập</h3>
+                    <p>Sau khi tìm hiểu về các quy định của nhà trường và trực tiếp trải nghiệm việc sử dụng AI, tôi xây dựng cho bản thân sáu nguyên tắc nhằm sử dụng AI một cách có trách nhiệm trong học tập.</p>
+                    <ul>
+                        <li><strong>Nguyên tắc thứ nhất: Xem AI là công cụ hỗ trợ, không phải người làm thay.</strong> Tôi chỉ sử dụng AI để hỗ trợ tìm ý tưởng, giải thích kiến thức hoặc cải thiện bài làm. Mọi sản phẩm học tập cuối cùng phải phản ánh sự hiểu biết và nỗ lực của bản thân.</li>
+                        <li><strong>Nguyên tắc thứ hai: Luôn kiểm chứng thông tin trước khi sử dụng.</strong> Mọi dữ liệu, số liệu và tài liệu tham khảo do AI cung cấp đều cần được đối chiếu với các nguồn chính thống hoặc các công trình nghiên cứu uy tín trước khi đưa vào bài làm.</li>
+                        <li><strong>Nguyên tắc thứ ba: Minh bạch về việc sử dụng AI.</strong> Nếu giảng viên hoặc quy định của môn học yêu cầu, tôi sẽ chủ động khai báo việc đã sử dụng AI cũng như phạmvi hỗ trợ của AI trong quá trình thực hiện bài tập.</li>
+                        <li><strong>Nguyên tắc thứ tư: Không sao chép nguyên văn đầu ra của AI.</strong> Tôi luôn đọc, phân tích, chỉnh sửa và diễn đạt lại nội dung bằng ngôn ngữ của mình để đảm bảo bài làm mang dấu ấn cá nhân và tránh nguy cơ đạo văn.</li>
+                        <li><strong>Nguyên tắc thứ năm: Tôn trọng quyền sở hữu trí tuệ và đạo đức học thuật.</strong> Tôi sẽ trích dẫn đầy đủ các tài liệu tham khảo, không sử dụng AI để tạo dữ liệu giả hoặc nguồn tài liệu không có thật và luôn tuân thủ các quy định về liêm chính học thuật của nhà trường.</li>
+                        <li><strong>Nguyên tắc thứ sáu: Không phụ thuộc vào AI, luôn phát triển năng lực bản thân.</strong> Tôi coi AI là công cụ hỗ trợ học tập chứ không phải là giải pháp thay thế tư duy. Mục tiêu cuối cùng của việc học là phát triển khả năng tư duy phản biện, nghiên cứu và giải quyết vấn đề của chính mình.</li>
+                    </ul>
+
+                    <h3>V. Infographic</h3>
+                    <p>(Vui lòng xem trong file PDF đính kèm)</p>
+
+                    <h3>TÀI LIỆU THAM KHẢO (APA 7th)</h3>
+                    <ul>
+                        <li>OpenAI. (2025). <em>ChatGPT</em>. <a href="https://chatgpt.com" target="_blank">https://chatgpt.com</a></li>
+                        <li>UNESCO. (2021). <em>Recommendation on the Ethics of Artificial Intelligence</em>. Paris: UNESCO.</li>
+                        <li>UNESCO. (2023). <em>Guidance for Generative AI in Education and Research</em>. Paris: UNESCO.</li>
+                        <li>Đại học Quốc gia Hà Nội. (2024). <em>Quy chế đào tạo đại học và các quy định về liêm chính học thuật</em>.</li>
+                        <li>Trường Đại học Ngoại ngữ – Đại học Quốc gia Hà Nội. (2024). <em>Sổ tay sinh viên và các quy định đào tạo hiện hành</em>.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        // --- Logic Hiển thị Card Dự Án ---
+        function renderProjects() {
+            const grid = document.getElementById('project-grid');
+            grid.innerHTML = '';
+            
+            projectsData.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = "bg-white/90 backdrop-blur-sm rounded-[2.5rem] shadow-lg p-8 hover:-translate-y-3 hover:shadow-[0_20px_50px_rgba(242,162,214,0.4)] transition-all duration-300 border-2 border-brand-pink1 relative overflow-hidden group flex flex-col h-full";
+                
+                card.innerHTML = `
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-brand-pink1 rounded-full mix-blend-multiply opacity-50 group-hover:scale-150 transition-transform duration-500 ease-in-out"></div>
+                    <div class="flex items-center gap-5 mb-5 relative z-10">
+                        <div class="w-16 h-16 rounded-[1.5rem] bg-brand-pink2 text-brand-purple flex items-center justify-center text-3xl group-hover:bg-brand-pink4 group-hover:text-white group-hover:rotate-12 transition-all duration-300 shadow-inner">
+                            <i class="ph-fill ${proj.icon}"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-brand-pink4 uppercase tracking-widest bg-brand-pink1 px-3 py-1 rounded-full">${proj.badge}</span>
+                        </div>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl text-brand-text leading-snug mb-3 relative z-10">${proj.title}</h3>
+                    <p class="text-brand-textLight text-[15px] mb-8 flex-grow relative z-10">${proj.desc}</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 mt-auto relative z-10">
+                        <button onclick="openContentModal(${proj.id})" class="flex-1 bg-brand-pink4 hover:bg-brand-purple text-white px-4 py-3 rounded-full text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-md hover:shadow-lg">
+                            <i class="ph-fill ph-book-heart text-xl group-hover/btn:animate-bounce"></i> Xem chi tiết
+                        </button>
+                        <button onclick="openEvidenceModal(${proj.id})" class="flex-1 bg-white border-2 border-brand-purple hover:bg-brand-pink1 text-brand-purple px-4 py-3 rounded-full text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-sm hover:shadow-md">
+                            Minh chứng <i class="ph-fill ph-file-pdf text-xl group-hover/btn:-translate-y-1 transition-transform"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- Logic Modals ---
+        function openContentModal(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
+
+            document.getElementById('modal-badge').innerText = project.badge;
+            document.getElementById('modal-title').innerText = project.title;
+            document.getElementById('modal-rich-content').innerHTML = project.htmlContent;
+            
+            const modal = document.getElementById('content-modal');
+            const contentBox = document.getElementById('content-modal-box');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                contentBox.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openEvidenceModal(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
+
+            document.getElementById('evidence-title').innerText = project.title;
+            document.getElementById('evidence-iframe').src = project.evidenceUrl;
+            
+            const modal = document.getElementById('evidence-modal');
+            const contentBox = document.getElementById('evidence-modal-box');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                contentBox.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const contentBox = document.getElementById(modalId + '-box');
+            
+            modal.classList.add('opacity-0');
+            contentBox.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                if(modalId === 'evidence-modal'){
+                    document.getElementById('evidence-iframe').src = "";
+                }
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Đóng modal khi click ra ngoài
+        ['content-modal', 'evidence-modal'].forEach(id => {
+            document.getElementById(id).addEventListener('click', function(e) {
+                if (e.target === this) closeModal(id);
+            });
+        });
+
+        // --- Logic Scroll Spy (Cuộn tự chuyển màu Navbar) ---
+        function initScrollSpy() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('bg-brand-pink1', 'text-brand-pink4');
+                            link.classList.add('text-brand-textLight');
+                            
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.remove('text-brand-textLight');
+                                link.classList.add('bg-brand-pink1', 'text-brand-pink4');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Khởi tạo
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            initScrollSpy();
+        });
+
+    </script>
+</body>
+</html>
